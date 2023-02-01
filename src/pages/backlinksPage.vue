@@ -259,6 +259,7 @@ export default {
       });
     },
     formatDate(date) {
+      if(date !== '?'){
       let check_date = new Date(date);
       const now = new Date();
       const delta = now - check_date;
@@ -271,7 +272,11 @@ export default {
       } else {
         return `${days} dagen geleden`;
       }
-    },
+    }
+    else{
+      return 'Nooit'
+    }
+  }
   },
   watch: {
     selected(v) {
