@@ -190,6 +190,7 @@ export default {
     const selected = ref([]);
   },
   mounted() {
+
     this.loadAllLinks();
   },
   data() {
