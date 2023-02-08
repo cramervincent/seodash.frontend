@@ -26,5 +26,14 @@ export default route(function (/* { store, ssrContext } */) {
     history: createHistory(process.env.VUE_ROUTER_BASE)
   })
 
+
+  Router.beforeEach((to, from, next) => {
+  if (to.meta.secure && !localStorage.getItem('JWT')) {
+    next('/welcome');
+  } else {
+    next();
+  }
+});
+
   return Router
 })

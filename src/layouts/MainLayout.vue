@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="HHh Hpr lFf">
     <q-header :class="$q.dark.mode ? 'bg-dark' : 'bg-teal'">
       <q-toolbar>
         <q-btn
@@ -14,12 +14,13 @@
         <q-toolbar-title> Prosuco SEO </q-toolbar-title>
 
         <div class="toggleScreenMode">
-          <q-btn flat square round icon="dark_mode" @click="$q.dark.toggle()" />
+          <q-btn flat square icon="o_dark_mode" @click="$q.dark.toggle()" />
+<q-btn flat square  icon="o_logout" @click="logOut" />
         </div>
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
+    <q-drawer v-model="leftDrawerOpen" show-if-above>
       <q-list>
         <q-item-label header> Menu </q-item-label>
 
@@ -70,6 +71,12 @@ export default defineComponent({
       },
     };
   },
+  methods: {
+    logOut() {
+      localStorage.removeItem('JWT');
+      this.$router.push({name:'login'})
+    }
+  }
 });
 </script>
 
