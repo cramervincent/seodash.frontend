@@ -7,23 +7,24 @@
         :columns="columns"
         row-key="name"
         :loading="loading"
+flat
       >
         <template v-slot:top>
           <q-btn
             icon="link"
             unelevated
-            rounded
-            color="positive"
+            color="teal"
             text-color="white"
             label="Toevoegen"
             class="q-mr-sm"
             @click="addSiteModal"
+            size="sm"
           />
           <q-btn
             icon="find_in_page"
             unelevated
-            rounded
-            color="primary"
+            size="sm"
+            color="deep-purple-12"
             text-color="white"
             label="Scan alle links"
             @click="scanLinks(selected)"
@@ -190,7 +191,6 @@ export default {
     const selected = ref([]);
   },
   mounted() {
-
     this.loadAllLinks();
   },
   data() {
@@ -260,24 +260,23 @@ export default {
       });
     },
     formatDate(date) {
-      if(date !== '?'){
-      let check_date = new Date(date);
-      const now = new Date();
-      const delta = now - check_date;
-      const days = Math.floor(delta / 86400000);
+      if (date !== "?") {
+        let check_date = new Date(date);
+        const now = new Date();
+        const delta = now - check_date;
+        const days = Math.floor(delta / 86400000);
 
-      if (days === 0) {
-        return "Vandaag";
-      } else if (days === 1) {
-        return "Gisteren";
+        if (days === 0) {
+          return "Vandaag";
+        } else if (days === 1) {
+          return "Gisteren";
+        } else {
+          return `${days} dagen geleden`;
+        }
       } else {
-        return `${days} dagen geleden`;
+        return "Nooit";
       }
-    }
-    else{
-      return 'Nooit'
-    }
-  }
+    },
   },
   watch: {
     selected(v) {
