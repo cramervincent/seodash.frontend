@@ -242,6 +242,12 @@ export default {
           message: "Scan geslaagd",
           type: "positive",
         });
+      }).catch((error)=>{
+        this.$q.loading.hide();
+        this.$q.notify({
+          type:'negative',
+          message:error
+        })
       });
     },
     scan_individual(id, i) {

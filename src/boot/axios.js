@@ -12,8 +12,10 @@ let api_url = "http://localhost:8000/";
 if (process.env.NODE_ENV === "production") {
   api_url = "https://api.seodash.vincent-dev.xyz/";
 }
-console.log(api_url)
+
 const api = axios.create({ baseURL: api_url });
+api.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('JWT');
+
 export default boot(({ app }) => {
   // for use inside Vue files (Options API) through this.$axios and this.$api
 

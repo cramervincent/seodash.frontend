@@ -55,12 +55,26 @@ export default {
   methods: {
     login() {
       this.loading = true;
-      // send api request to login and then place jwt in localstorage and forward to backlinks
-      setTimeout(() => {
-        localStorage.setItem("JWT", JSON.stringify("loremipsum123"));
+      this.$api.post('user/login', {
+        email:this.user.username,
+        password:this.user.password
+      }).then((response =>{
+        setTimeout(() => {
+        localStorage.setItem("JWT", response.data.access_token);
         this.$router.push({ name: "backlinks" });
       }, 3000);
-      //
+
+      })).catch((error)=>{
+        console.log(error.response.data.detail)
+        this.$q.notify({
+          message:error.response.data.detail,
+          type:'negative'
+        })
+        this.loading = false;
+      })
+
+
+
     },
   },
 };
