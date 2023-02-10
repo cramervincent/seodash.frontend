@@ -41,6 +41,9 @@
 .card {
   width: 20vw;
   padding: 2.5rem;
+  @media (max-width:600px) {
+    width:90vw;
+  }
 }
 </style>
 
