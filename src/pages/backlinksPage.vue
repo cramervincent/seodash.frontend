@@ -7,7 +7,10 @@
         :columns="columns"
         row-key="name"
         :loading="loading"
-flat
+        flat
+        no-data-label="Nog geen links toegevoegd."
+        rows-per-page-label="Rijen per pagina"
+        :pagination="{rowsPerPage:25}"
       >
         <template v-slot:top>
           <q-btn
@@ -235,20 +238,23 @@ export default {
       this.$q.loading.show({
         message: "Sites worden gescand...",
       });
-      await this.$api.get("backlinks/scan").then((response) => {
-        this.rows = response.data;
-        this.$q.loading.hide();
-        this.$q.notify({
-          message: "Scan geslaagd",
-          type: "positive",
-        });
-      }).catch((error)=>{
-        this.$q.loading.hide();
-        this.$q.notify({
-          type:'negative',
-          message:error
+      await this.$api
+        .get("backlinks/scan")
+        .then((response) => {
+          this.rows = response.data;
+          this.$q.loading.hide();
+          this.$q.notify({
+            message: "Scan geslaagd",
+            type: "positive",
+          });
         })
-      });
+        .catch((error) => {
+          this.$q.loading.hide();
+          this.$q.notify({
+            type: "negative",
+            message: error,
+          });
+        });
     },
     scan_individual(id, i) {
       this.rows[i].status = "null";
@@ -293,7 +299,7 @@ export default {
       }
     },
   },
-  mounted() {
+  aftermount() {
     this.$api.get("backlinks").then((response) => {
       this.rows = response.data;
     });

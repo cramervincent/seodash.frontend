@@ -61,6 +61,7 @@ export default {
       }).then((response =>{
         setTimeout(() => {
         localStorage.setItem("JWT", response.data.access_token);
+        this.$api.defaults.headers.common['Authorization'] ='Bearer ' + localStorage.getItem('JWT')
         this.$router.push({ name: "backlinks" });
       }, 3000);
 

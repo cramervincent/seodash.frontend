@@ -7,14 +7,17 @@ import axios from "axios";
 // good idea to move this instance creation inside of the
 // "export default () => {}" function below (which runs individually
 // for each client)
+// const store = useStore()
 
 let api_url = "http://localhost:8000/";
 if (process.env.NODE_ENV === "production") {
   api_url = "https://api.seodash.vincent-dev.xyz/";
 }
 
+
+
 const api = axios.create({ baseURL: api_url });
-api.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('JWT');
+api.defaults.headers.common['Authorization'] ='Bearer ' + localStorage.getItem('JWT')
 
 export default boot(({ app }) => {
   // for use inside Vue files (Options API) through this.$axios and this.$api
