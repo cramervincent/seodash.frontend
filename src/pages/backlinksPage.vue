@@ -209,7 +209,7 @@ export default {
   },
   methods: {
     loadAllLinks() {
-      this.$api.get("backlinks/").then((response) => {
+      this.$api.get("backlinks").then((response) => {
         this.rows = response.data;
       });
     },
